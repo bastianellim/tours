@@ -4,6 +4,11 @@ Tours::Application.routes.draw do
   root :to => "home#index"
   
   devise_for :users
+  
+  match 'user_info' => 'user_infos#show', :via => :get
+  match 'user_info' => 'user_infos#update', :via => :put
+  
+  #resource :user_info
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

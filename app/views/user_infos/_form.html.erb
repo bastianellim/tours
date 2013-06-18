@@ -1,0 +1,106 @@
+<% if notice %>
+	<div class="alert alert-success">
+    <%= notice %>
+	</div>
+<% end %>
+
+<%= form_for([@user.user_info], :url => '/user_info', :html => {:class => 'form-horizontal'} ) do |f| %>
+    <fieldset>
+        <!-- Address form -->
+				<h2>User Info</h2>
+				
+				
+				
+        <!-- userName input-->
+        <div class="control-group">
+            <label class="control-label"><%=t('activerecord.attributes.user.username')%></label>
+            <div class="controls">
+							<%= @user.username %>	
+            </div>
+        </div>
+				
+        <!-- email input-->
+        <div class="control-group">
+            <label class="control-label"><%=t('activerecord.attributes.user.email')%></label>
+            <div class="controls">
+							<%= @user.email %>	
+            </div>
+        </div>
+				
+        <!-- firstName input-->
+        <div class="control-group">
+            <label class="control-label"><%=t('activerecord.attributes.user_info.firstName')%></label>
+            <div class="controls">
+							<%= f.text_field :firstName, :placeholder => t('activerecord.attributes.user_info.firstName'), :class => 'input-xlarge' %>	
+            </div>
+        </div>
+				
+        <!-- lastName input-->
+        <div class="control-group">
+            <label class="control-label"><%=t('activerecord.attributes.user_info.lastName')%></label>
+            <div class="controls">
+							<%= f.text_field :lastName, :placeholder => t('activerecord.attributes.user_info.lastName'), :class => 'input-xlarge' %>	
+            </div>
+        </div>
+
+        <!-- birthday input-->
+        <div class="control-group">
+            <label class="control-label"><%=t('activerecord.attributes.user_info.birthday')%></label>
+            <div class="controls">
+							<%= f.date_select :birthday %>	
+            </div>
+        </div>
+        
+        <!-- gender input-->
+        <div class="control-group">
+            <label class="control-label"><%=t('activerecord.attributes.user_info.gender')%></label>
+            <div class="controls">
+							<%= f.select :gender,[['Male','M'],['Female','F']], {:prompt => 'Select Gender'} %>	
+            </div>
+        </div>
+				
+        <!-- city input-->
+        <div class="control-group">
+            <label class="control-label"><%=t('activerecord.attributes.user_info.city')%></label>
+            <div class="controls">
+							<%= f.text_field :city, :placeholder => t('activerecord.attributes.user_info.city'), :class => 'input-xlarge' %>	
+            </div>
+        </div>
+				
+        <!-- country input-->
+        <div class="control-group">
+            <label class="control-label"><%=t('activerecord.attributes.user_info.country')%></label>
+            <div class="controls">
+							<%= f.text_field :country, :placeholder => t('activerecord.attributes.user_info.country'), :class => 'input-xlarge' %>	
+            </div>
+        </div>
+        
+				<!-- avatar input-->
+				<%= image_tag @user.user_info.avatar.url %>
+				<%= image_tag @user.user_info.avatar.url(:medium) %>
+				<%= image_tag @user.user_info.avatar.url(:thumb) %>
+				<%= image_tag @user.user_info.avatar.url(:tiny) %>
+				
+        <div class="control-group">
+            <label class="control-label"><%=t('activerecord.attributes.user_info.country')%></label>
+            <div class="controls">
+						  <%= f.file_field :avatar %>
+            </div>
+        </div>
+<!--				
+				<div class="fileupload fileupload-new" data-provides="fileupload">
+				  <div class="fileupload-preview thumbnail" style="width: 200px; height: 150px;"></div>
+				  <div>
+				    <span class="btn btn-file"><span class="fileupload-new">Select image</span><span class="fileupload-exists">Change</span><input type="file" /></span>
+				    <a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Remove</a>
+				  </div>
+				</div>
+	-->			
+        
+        <div class="control-group">
+          <div class="controls">
+					  <%= f.submit "Update", :class => 'btn btn-info' %>
+				  </div>
+			  </div>
+    </fieldset>
+<% end %>
