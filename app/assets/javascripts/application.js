@@ -15,3 +15,47 @@
 //= require twitter/bootstrap
 //= require jasny-bootstrap
 //= require_tree .
+
+$(document).ready(function() {
+
+
+
+var service = new google.maps.places.AutocompleteService();
+var geocoder = new google.maps.Geocoder();
+
+//Typeahead for citites
+$(".typehead-cities").typeahead({
+  
+  source: function(query, process) {
+    var e = $('.typehead-cities');
+    service.getPlacePredictions({ input: query, types: ['(cities)'], componentRestrictions: {country: e.data('refCountry')} }, function(predictions, status) {
+      if (status == google.maps.places.PlacesServiceStatus.OK) {
+        process($.map(predictions, function(prediction) {
+          return prediction.description;
+        }));
+      }
+    });
+  },
+  //matcher:function(){return true;},
+  updater: function (item) {
+    geocoder.geocode({ address: item }, function(results, status) {
+      if (status != google.maps.GeocoderStatus.OK) {
+        alert('Cannot find address');
+        return;
+      }
+      //alert('Selected');
+      //map.setCenter(results[0].geometry.location);
+      //map.setZoom(12); 
+    });
+    return item;
+  }
+});
+
+//Clear text field onfocus
+$(".clear-onfocus").focus(function(){
+    //$(this).val('');
+});
+
+
+
+});

@@ -35,6 +35,10 @@ gem 'jquery-rails'
 gem 'less-rails-bootstrap'
 gem 'jasny_bootstrap_extension_rails'
 
+gem 'countries'
+#gem 'country_select'
+gem 'localized_country_select', '>= 0.9.2'
+
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
