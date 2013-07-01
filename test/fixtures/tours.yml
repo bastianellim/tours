@@ -1,0 +1,27 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  title: MyString
+  shortDescription: MyText
+  description: MyText
+  period: MyString
+  airport: MyString
+  budget: 9.99
+  commercialPrice: 9.99
+  commercial: false
+  departureDate: 2013-06-28
+  returnDate: 2013-06-28
+  travelerType: MyString
+
+two:
+  title: MyString
+  shortDescription: MyText
+  description: MyText
+  period: MyString
+  airport: MyString
+  budget: 9.99
+  commercialPrice: 9.99
+  commercial: false
+  departureDate: 2013-06-28
+  returnDate: 2013-06-28
+  travelerType: MyString

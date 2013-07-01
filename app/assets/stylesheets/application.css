@@ -10,8 +10,9 @@
  *
  *= require_self
  *= require_tree .
- *= require twitter/bootstrap
+ *= require bootstrap
  *= require jasny-bootstrap
+ *= require bootstrap-datepicker
  */
  
 #googlemap {

@@ -3,6 +3,11 @@
 
 en:
   hello: "Hello world"
+  date:
+    formats:
+      default: "%Y-%m-%d"
+      short: "%b %d"
+      long: "%B %d, %Y"
   activerecord:
     models:
       user: "User"
@@ -20,4 +25,10 @@ en:
         gender: "Gender"
         country: "Country"
         city: "City"
-        
+      tour:
+        title: "Title"
+        shortDescription: "Short description"
+        departureDate: "Departure date"
+        returnDate: "Return date"
+        budget: "Budget"
+        description: "Description"

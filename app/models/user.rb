@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   
   has_one :user_info
+  has_many :tours
   accepts_nested_attributes_for :user_info
   
   # Include default devise modules. Others available are:

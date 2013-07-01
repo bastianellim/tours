@@ -5,10 +5,14 @@ Tours::Application.routes.draw do
   
   devise_for :users
   
-  match 'user_info' => 'user_infos#show', :via => :get
+  match 'user_info' => 'user_infos#show',   :via => :get
   match 'user_info' => 'user_infos#update', :via => :put
   
-  #resource :user_info
+  
+  match 'tour/new'  => 'tours#new',         :via => :get
+  match 'tours/mine'  => 'tours#showMine',    :via => :get
+  
+  resources :tours
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

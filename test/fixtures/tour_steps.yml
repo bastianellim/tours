@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  title: MyString
+  sequence: 1
+  country: MyString
+  city: MyString
+  durationDays: 1
+  description: MyText
+  transferToType: MyString
+
+two:
+  title: MyString
+  sequence: 1
+  country: MyString
+  city: MyString
+  durationDays: 1
+  description: MyText
+  transferToType: MyString

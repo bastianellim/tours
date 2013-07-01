@@ -30,13 +30,15 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
-gem 'therubyracer'
+#gem 'therubyracer'
 gem 'jquery-rails'
-gem 'less-rails-bootstrap'
+#gem 'less-rails-bootstrap'
+gem 'bootstrap-sass', '~> 2.3.2.0'
 gem 'jasny_bootstrap_extension_rails'
+gem 'bootstrap-datepicker-rails'
+
 
 gem 'countries'
-#gem 'country_select'
 gem 'localized_country_select', '>= 0.9.2'
 
 

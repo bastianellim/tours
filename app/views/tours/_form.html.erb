@@ -1,0 +1,86 @@
+<% if notice %>
+	<div class="alert alert-success">
+		<button type="button" class="close" data-dismiss="alert">×</button>
+    <%= notice %>
+	</div>
+<% end %>
+
+<%= form_for([@tour], :html => {:class => 'form-horizontal'} ) do |f| %>
+    <fieldset>
+        <!-- Address form -->
+				<h2>Insert new Tour</h2>
+				
+				
+        <!-- title input-->
+        <div class="control-group">
+            <label class="control-label"><%=t('activerecord.attributes.tour.title')%></label>
+            <div class="controls">
+							<%= f.text_field :title, :placeholder => t('activerecord.attributes.tour.title'), :class => 'input-xlarge' %>	
+            </div>
+        </div>
+				
+        <!-- shortDescription input-->
+        <div class="control-group">
+            <label class="control-label"><%=t('activerecord.attributes.tour.shortDescription')%></label>
+            <div class="controls">
+							<%= f.text_field :shortDescription, :placeholder => t('activerecord.attributes.tour.shortDescription'), :class => 'input-xlarge' %>	
+            </div>
+        </div>
+
+        <!-- departureDate input-->
+        <div class="control-group">
+            <label class="control-label"><%=t('activerecord.attributes.tour.departureDate')%></label>
+            <div class="controls">
+							<div class="input-append">
+							<%= text_field_tag nil, nil, 
+								:placeholder => t('activerecord.attributes.tour.departureDate'), 
+								:class =>"date-picker", 
+								:data => { :alt_field_name => 'tour_departureDate'} %>
+							<%= f.hidden_field :departureDate %>
+							<span class="add-on"><i class="icon-calendar"></i></span>
+							</div>	
+            </div>
+        </div>
+        
+        <!-- returnDate input-->
+        <div class="control-group">
+            <label class="control-label"><%=t('activerecord.attributes.tour.returnDate')%></label>
+            <div class="controls">
+							<div class="input-append">
+							<%= text_field_tag nil, nil, 
+								:placeholder => t('activerecord.attributes.tour.returnDate'), 
+								:class =>"date-picker", 
+								:data => { :alt_field_name => 'tour_returnDate'} %>
+							<%= f.hidden_field :returnDate %>	
+							<span class="add-on"><i class="icon-calendar"></i></span>
+							</div>
+            </div>
+        </div>
+				
+        <!-- budget input-->
+        <div class="control-group">
+            <label class="control-label"><%=t('activerecord.attributes.tour.budget')%></label>
+            <div class="controls">
+							<%= f.text_field :budget, :placeholder => t('activerecord.attributes.tour.budget'), :class => 'input-xlarge' %>	
+            </div>
+        </div>
+				
+        <!-- description input-->
+        <div class="control-group">
+            <label class="control-label"><%=t('activerecord.attributes.tour.description')%></label>
+            <div class="controls">
+							<%= f.text_field :description, :placeholder => t('activerecord.attributes.tour.description'), :class => 'input-xlarge' %>	
+            </div>
+        </div>
+        
+				
+        
+        <div class="control-group">
+          <div class="controls">
+					  <%= f.submit "Create", :class => 'btn btn-info' %>
+				  </div>
+			  </div>
+    </fieldset>
+<% end %>
+
+

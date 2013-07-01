@@ -12,8 +12,9 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require twitter/bootstrap
+//= require bootstrap
 //= require jasny-bootstrap
+//= require bootstrap-datepicker
 //= require_tree .
 
 $(document).ready(function() {
@@ -52,9 +53,35 @@ $(".typehead-cities").typeahead({
 });
 
 //Clear text field onfocus
-$(".clear-onfocus").focus(function(){
-    //$(this).val('');
+$(".clear-onfocus").click(function(){
+    $(this).val('');
 });
+
+//When country selection change:
+//  -reset city refCountry value
+//  -Enable/Disable city field
+//  -Clear city field
+$(".country-for-city").change(function(){
+  var f = $(this).closest("form");
+  var cityInput = $(".typehead-cities", f);
+  if($(this).val()){
+    cityInput.data('refCountry', $(this).val())
+    cityInput.removeAttr('disabled');
+  }else{
+    cityInput.data('refCountry', '')
+    cityInput.attr('disabled', 'disabled');
+  }
+  cityInput.val('');
+});
+
+//Date picker
+//Setup
+$(".date-picker").datepicker({
+  autoclose: true
+}).on('changeDate', function(e){
+  $('#'+$(this).data('altFieldName')).val(e.format('yyyy-mm-dd'));
+});
+
 
 
 
