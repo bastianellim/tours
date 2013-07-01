@@ -10,6 +10,7 @@ group :development, :test do
 end
 
 gem 'mysql2'
+gem 'pg'
 
 #gem 'rmagick'
 #gem 'paperclip'
