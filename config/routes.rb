@@ -10,7 +10,7 @@ Tours::Application.routes.draw do
   
   
   match 'tour/new'  => 'tours#new',         :via => :get
-  match 'tours/mine'  => 'tours#showMine',    :via => :get
+  match 'tours/mine'  => 'tours#mine',    :via => :get
   
   resources :tours
 

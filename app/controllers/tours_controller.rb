@@ -1,10 +1,16 @@
 class ToursController < ApplicationController  
-  before_filter :authenticate_user!, :only => [:new]
+  before_filter :authenticate_user!, :only => [:new, :create, :mine]
   
   
-  
+  # GET /tours/1
+  # GET /tours/1.json
   def show
-    @user = current_user
+    @tour = Tour.find(params[:id])
+
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render json: @tour }
+    end
   end
   
   # GET /tours/new
@@ -24,7 +30,7 @@ class ToursController < ApplicationController
   # POST /tours
   # POST /tours.json
   def create
-    @tour = Tour.new(params[:tour])
+    @tour = current_user.tours.build(params[:tour])
 
     respond_to do |format|
       if @tour.save
@@ -37,5 +43,7 @@ class ToursController < ApplicationController
     end
   end
   
-  
+  def mine
+    @tours = current_user.tours
+  end
 end

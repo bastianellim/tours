@@ -1,9 +1,37 @@
 
 <div class="container">
-	<table class="table">
+	
+	<% if notice %>
+		<div class="alert alert-success">
+			<button type="button" class="close" data-dismiss="alert">×</button>
+	    <%= notice %>
+		</div>
+	<% end %>
+	
+	<table class="table table-bordered">
 		<tr>
-			<td>Title</td>
-			<td>titolo di prova</td>
+			<td><%=t('activerecord.attributes.tour.title')%></td>
+			<td><%= @tour.title%></td>
+		</tr>
+		<tr>
+			<td><%=t('activerecord.attributes.tour.shortDescription')%></td>
+			<td><%= @tour.shortDescription%></td>
+		</tr>
+		<tr>
+			<td><%=t('activerecord.attributes.tour.departureDate')%></td>
+			<td><%= @tour.departureDate%></td>
+		</tr>
+		<tr>
+			<td><%=t('activerecord.attributes.tour.returnDate')%></td>
+			<td><%= @tour.returnDate%></td>
+		</tr>
+		<tr>
+			<td><%=t('activerecord.attributes.tour.budget')%></td>
+			<td><%= @tour.budget%></td>
+		</tr>
+		<tr>
+			<td><%=t('activerecord.attributes.tour.description')%></td>
+			<td><%= @tour.description%></td>
 		</tr>
 	</table>
 	

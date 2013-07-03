@@ -79,8 +79,8 @@
 							<%= f.text_field :city, 
 							:placeholder => t('activerecord.attributes.user_info.city'), 
 							:class => 'input-xlarge typehead-cities clear-onfocus', 
-							:disabled => @user.user_info.country.empty?, 
-							:data => { :ref_country => @user.user_info.country.downcase} %>	
+							:disabled => @user.user_info.country.blank?, 
+							:data => { :ref_country => @user.user_info.country.blank? ? '' : @user.user_info.country.downcase} %>	
             </div>
         </div>
         
