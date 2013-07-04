@@ -8,11 +8,24 @@
 		</div>
 	<% end %>
 	
-	<table class="table table-bordered">
+	<table class="table">
 		<tr>
-			<td>Tour</td>
-			<td><%= @tours.empty? %></td>
+			<th><%=t('activerecord.attributes.tour.title')%></th>
+			<th><%=t('activerecord.attributes.tour.departureDate')%></th>
+			<th><%=t('activerecord.attributes.tour.budget')%></th>
+			<th style="width: 36px;"></th>
 		</tr>
+		<% @tours.each do |tour| %>
+		<tr>
+			<td><%= tour.title %></td>
+			<td><%= tour.departureDate.to_s(:long) %></td>
+			<td><%= number_to_currency(tour.budget, :locale => :it) %></td>
+			<td>
+				<a href="user.html"><i class="icon-pencil"></i></a>
+				<a href="#myModal" role="button" data-toggle="modal"><i class="icon-remove"></i></a>
+			</td>
+		</tr>
+		<% end %>
 	</table>
 	
 </div>

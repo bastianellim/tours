@@ -60,9 +60,12 @@
         <!-- budget input-->
         <div class="control-group">
             <label class="control-label"><%=t('activerecord.attributes.tour.budget')%></label>
-            <div class="controls">
-							<%= f.text_field :budget, :placeholder => t('activerecord.attributes.tour.budget'), :class => 'input-xlarge' %>	
-            </div>
+						<div class="controls">
+							<div class="input-append">
+								<%= f.text_field :budget, :placeholder => t('activerecord.attributes.tour.budget'), :class => 'input-small' %>
+								<span class="add-on">.00</span>
+            	</div>
+					</div>
         </div>
 				
         <!-- description input-->
