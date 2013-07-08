@@ -12,7 +12,9 @@ Tours::Application.routes.draw do
   match 'tour/new'  => 'tours#new',         :via => :get
   match 'tours/mine'  => 'tours#mine',    :via => :get
   
-  resources :tours
+  resources :tours do
+    resources :tour_steps
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

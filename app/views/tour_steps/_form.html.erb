@@ -1,0 +1,61 @@
+<% if notice %>
+	<div class="alert alert-success">
+		<button type="button" class="close" data-dismiss="alert">×</button>
+    <%= notice %>
+	</div>
+<% end %>
+
+<%= form_for([@tour, @tour.tour_step.build], :remote => true, :html => {:class => 'form-horizontal'} ) do |f| %>
+    <fieldset>
+        <!-- Address form -->
+				<h4>Insert new Step</h4>
+				
+				
+        <!-- title input-->
+        <div class="control-group">
+            <label class="control-label"><%=t('activerecord.attributes.tour.title')%></label>
+            <div class="controls">
+							<%= f.text_field :title, :placeholder => t('activerecord.attributes.tour.title'), :class => 'input-xlarge' %>	
+            </div>
+        </div>
+				
+        <!-- description input-->
+        <div class="control-group">
+            <label class="control-label"><%=t('activerecord.attributes.tour.description')%></label>
+            <div class="controls">
+							<%= f.text_field :description, :placeholder => t('activerecord.attributes.tour.description'), :class => 'input-xlarge' %>	
+            </div>
+        </div>
+        
+				<!-- country input-->
+        <div class="control-group">
+            <label class="control-label"><%=t('activerecord.attributes.user_info.country')%></label>
+            <div class="controls">
+							<!-- <%= f.text_field :country, :placeholder => t('activerecord.attributes.user_info.country'), :class => 'input-xlarge' %> -->
+							<!-- <%= f.country_select :country, nil, {}, {:class=>'some-class', :'data-provide' =>"no-typeahead"} %> -->
+							<%= f.localized_country_select :country, [], {:include_blank => 'Country'}, {:class => 'country-for-city'} %>
+								
+            </div>
+        </div>
+        <!-- city input-->
+        <div class="control-group">
+            <label class="control-label"><%=t('activerecord.attributes.user_info.city')%></label>
+            <div class="controls">
+							<%= f.text_field :city, 
+							:placeholder => t('activerecord.attributes.user_info.city'), 
+							:class => 'input-xlarge typehead-cities clear-onfocus', 
+							:disabled => :country.blank?, 
+							:data => { :ref_country => :country.blank? ? '' : :country.downcase} %>	
+            </div>
+        </div>
+				
+        <!-- create button-->
+        <div class="control-group">
+          <div class="controls">
+					  <%= f.submit "Create", :class => 'btn btn-info' %>
+				  </div>
+			  </div>
+    </fieldset>
+<% end %>
+
+

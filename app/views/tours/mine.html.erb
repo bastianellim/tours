@@ -21,7 +21,7 @@
 			<td><%= tour.departureDate.to_s(:long) %></td>
 			<td><%= number_to_currency(tour.budget, :locale => :it) %></td>
 			<td>
-				<a href="user.html"><i class="icon-pencil"></i></a>
+				<a href="<%= tour_path(tour)%>"><i class="icon-pencil"></i></a>
 				<a href="#myModal" role="button" data-toggle="modal"><i class="icon-remove"></i></a>
 			</td>
 		</tr>

@@ -1,0 +1,24 @@
+	<h4>Steps</h4>
+
+	<div class="accordion" id="accordion2">
+		<% @tour.tour_step.each.with_index do |tour_step, index| %>		
+	  <div class="accordion-group">
+	    <div class="accordion-heading">
+				<div class="accordion-toggle">
+	      <a class="accordion-toggle2" data-toggle="collapse" data-parent="#accordion2" href="#collapse-<%= index%>">
+					<%= tour_step.title %>
+	      </a>
+				<a href="#" class="pull-right"><i class="icon-pencil"></i></a>
+				<a href="#" class="pull-right"><i class="icon-search"></i></a>
+				</div>
+	    </div>
+	    <div id="collapse-<%= index%>" class="accordion-body collapse">
+	      <div class="accordion-inner">
+					<%= tour_step.description %>
+	      </div>
+	    </div>
+	  </div>
+		<% end %>
+	</div>
+	
+	<%= render 'tour_steps/form' %>	

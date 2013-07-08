@@ -8,6 +8,8 @@
 		</div>
 	<% end %>
 	
+	<h4>Tour Info</h4>
+	
 	<table class="table table-bordered">
 		<tr>
 			<td><%=t('activerecord.attributes.tour.title')%></td>
@@ -26,8 +28,8 @@
 			<td><%= @tour.returnDate%></td>
 		</tr>
 		<tr>
-			<td><%=t('activerecord.attributes.tour.budget')%></td>
-			<td><%= @tour.budget%></td>
+			<td><%= t('activerecord.attributes.tour.budget')%> <%= locale%></td>
+			<td><%= number_to_currency(@tour.budget, :locale => locale ) %></td>
 		</tr>
 		<tr>
 			<td><%=t('activerecord.attributes.tour.description')%></td>
@@ -35,4 +37,8 @@
 		</tr>
 	</table>
 	
+	<div id="steps-list">		
+		<%= render 'steps_list' %>
+	</div>
+		
 </div>

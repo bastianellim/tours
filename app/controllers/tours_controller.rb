@@ -6,6 +6,7 @@ class ToursController < ApplicationController
   # GET /tours/1.json
   def show
     @tour = Tour.find(params[:id])
+    @tour_step = TourStep.new
 
     respond_to do |format|
       format.html # show.html.erb
@@ -42,6 +43,11 @@ class ToursController < ApplicationController
       end
     end
   end
+  
+  # GET /tours/1/edit
+  #def edit
+  #  @tour = Tour.find(params[:id])
+  #end
   
   def mine
     @tours = current_user.tours
