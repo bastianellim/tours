@@ -31,7 +31,8 @@ class TourStepsController < ApplicationController
         format.html { redirect_to @tour, notice: 'Tour Step was successfully created.' }
         format.json { render json: @tour, status: :created, location: @tour }
         format.js do
-          render :partial => "steps_list" 
+          render :partial => "steps_list",
+          notice: 'Tour Step was successfully created.'
         end
       else
         format.html { render action: "new" }

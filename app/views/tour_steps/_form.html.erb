@@ -13,23 +13,26 @@
 				
         <!-- title input-->
         <div class="control-group">
-            <label class="control-label"><%=t('activerecord.attributes.tour.title')%></label>
+            <label class="control-label"><%=t('activerecord.attributes.tour_step.title')%></label>
             <div class="controls">
-							<%= f.text_field :title, :placeholder => t('activerecord.attributes.tour.title'), :class => 'input-xlarge' %>	
+							<%= f.text_field :title, :placeholder => t('activerecord.attributes.tour_step.title'), :class => 'input-xlarge' %>	
             </div>
         </div>
 				
         <!-- description input-->
         <div class="control-group">
-            <label class="control-label"><%=t('activerecord.attributes.tour.description')%></label>
+            <label class="control-label"><%=t('activerecord.attributes.tour_step.description')%></label>
             <div class="controls">
-							<%= f.text_field :description, :placeholder => t('activerecord.attributes.tour.description'), :class => 'input-xlarge' %>	
+							<%= f.text_area :description, 
+								:placeholder => t('activerecord.attributes.tour_step.description'), 
+								:class => 'input-xlarge',
+								rows: 5 %>	
             </div>
         </div>
         
 				<!-- country input-->
         <div class="control-group">
-            <label class="control-label"><%=t('activerecord.attributes.user_info.country')%></label>
+            <label class="control-label"><%=t('activerecord.attributes.tour_step.country')%></label>
             <div class="controls">
 							<!-- <%= f.text_field :country, :placeholder => t('activerecord.attributes.user_info.country'), :class => 'input-xlarge' %> -->
 							<!-- <%= f.country_select :country, nil, {}, {:class=>'some-class', :'data-provide' =>"no-typeahead"} %> -->
@@ -39,20 +42,31 @@
         </div>
         <!-- city input-->
         <div class="control-group">
-            <label class="control-label"><%=t('activerecord.attributes.user_info.city')%></label>
+            <label class="control-label"><%=t('activerecord.attributes.tour_step.city')%></label>
             <div class="controls">
 							<%= f.text_field :city, 
-							:placeholder => t('activerecord.attributes.user_info.city'), 
+							:placeholder => t('activerecord.attributes.tour_step.city'), 
 							:class => 'input-xlarge typehead-cities clear-onfocus', 
 							:disabled => :country.blank?, 
 							:data => { :ref_country => :country.blank? ? '' : :country.downcase} %>	
             </div>
         </div>
+        
+        <!-- duration input-->
+        <div class="control-group">
+            <label class="control-label"><%=t('activerecord.attributes.tour_step.durationDays')%></label>
+            <div class="controls">
+							<%= f.text_field :durationDays, :placeholder => t('activerecord.attributes.tour_step.durationDays'), :class => 'input-small' %>	
+            </div>
+        </div>
+        
 				
         <!-- create button-->
         <div class="control-group">
           <div class="controls">
-					  <%= f.submit "Create", :class => 'btn btn-info' %>
+					  <%= f.submit "Create", 
+						:class => 'btn btn-info',
+						:data => {:loading_text => 'Loading...'} %>
 				  </div>
 			  </div>
     </fieldset>

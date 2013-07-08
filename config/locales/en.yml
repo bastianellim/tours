@@ -41,3 +41,9 @@ en:
         returnDate: "Return date"
         budget: "Budget"
         description: "Description"
+      tour_step:
+        title: "Title"
+        description: "Description"
+        country: "Country"
+        city: "City"
+        durationDays: "Duration"

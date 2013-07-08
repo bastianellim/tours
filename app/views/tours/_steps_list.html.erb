@@ -1,4 +1,11 @@
 	<h4>Steps</h4>
+	
+	<% if notice %>
+		<div class="alert alert-success">
+			<button type="button" class="close" data-dismiss="alert">×</button>
+	    <%= notice %>
+		</div>
+	<% end %>
 
 	<div class="accordion" id="accordion2">
 		<% @tour.tour_step.each.with_index do |tour_step, index| %>		
