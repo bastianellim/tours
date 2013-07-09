@@ -21,7 +21,7 @@ var service = new google.maps.places.AutocompleteService();
 var geocoder = new google.maps.Geocoder();
 
 function setupPageEvents(){
-  
+    
   //Typeahead for citites
   $(".typehead-cities").typeahead({
   

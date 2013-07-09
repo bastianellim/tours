@@ -14,11 +14,11 @@
  *= require jasny-bootstrap
  *= require bootstrap-datepicker
  */
- 
+  
 #googlemap {
   border: 1px dashed #999;
   width: 100%;
-  height: 400px;
+  height: 600px;
 }
 
 #googlemap img {
