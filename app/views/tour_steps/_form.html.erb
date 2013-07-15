@@ -5,12 +5,10 @@
 	</div>
 <% end %>
 
-<%= form_for([@tour, @tour.tour_step.build], :remote => true, :html => {:class => 'form-horizontal'} ) do |f| %>
+<%= form_for([@tour, @tour.tour_step.build], :remote => true, :html => {:class => 'form-horizontal well'} ) do |f| %>
     <fieldset>
         <!-- Address form -->
-				<h4>Insert new Step</h4>
-				
-				
+				<h5>Intro</h5>				
         <!-- title input-->
         <div class="control-group">
             <label class="control-label"><%=t('activerecord.attributes.tour_step.title')%></label>
@@ -29,7 +27,8 @@
 								rows: 5 %>	
             </div>
         </div>
-        
+				
+        <h5>Where</h5>
 				<!-- country input-->
         <div class="control-group">
             <label class="control-label"><%=t('activerecord.attributes.tour_step.country')%></label>
@@ -51,7 +50,27 @@
 							:data => { :ref_country => :country.blank? ? '' : :country.downcase} %>	
             </div>
         </div>
-        
+				
+        <h5>How did you reach</h5>
+        <div class="control-group">
+            <label class="control-label">By</label>
+            <div class="controls">
+							<select class="transfer-by">
+								<option value=""></option>
+								<option value="AIR">Airplane</option>
+								<option value="TRAIN">Train</option>
+								<option value="BUS">Bus</option>
+								<option value="RENTCAR">Rented car</option>
+								<option value="MYCAR">My own car</option>
+							</select>
+							
+							<input type="text" class="hidden for-transfer-by AIR" placeholder="APT from" />
+							<input type="text" class="hidden for-transfer-by AIR" placeholder="APT to" />
+							<input type="text" class="hidden for-transfer-by TRAIN for-BUS for-RENTCAR" placeholder="Extra info" />
+            </div>
+        </div>
+				
+				<h5>How long did you stay</h5>
         <!-- duration input-->
         <div class="control-group">
             <label class="control-label"><%=t('activerecord.attributes.tour_step.durationDays')%></label>
@@ -60,6 +79,28 @@
             </div>
         </div>
         
+				<h5>Where did you sleep</h5>
+        <!-- duration input-->
+        <div class="control-group">
+            <label class="control-label"><%=t('activerecord.attributes.tour_step.durationDays')%></label>
+            <div class="controls">
+							<div class="input-append">
+								<input  id="field1" name="prof1" type="text" placeholder="Place" />
+								<button id="b1" onClick="addFormField()" class="btn btn-info" type="button">+</button>
+							</div>	
+            </div>
+        </div>
+				
+				<h5>Places to visit</h5>
+        <div class="control-group">
+            <label class="control-label"><%=t('activerecord.attributes.tour_step.durationDays')%></label>
+            <div class="controls">
+							<div class="input-append">
+								<input  id="field1" name="prof1" type="text" placeholder="Place" />
+								<button id="b1" onClick="addFormField()" class="btn btn-info" type="button">+</button>
+							</div>	
+            </div>
+        </div>
 				
         <!-- create button-->
         <div class="control-group">

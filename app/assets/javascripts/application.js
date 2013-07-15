@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery-ui
 //= require bootstrap
 //= require jasny-bootstrap
 //= require bootstrap-datepicker
@@ -78,6 +79,14 @@ function setupPageEvents(){
     autoclose: true
   }).on('changeDate', function(e){
     $('#'+$(this).data('altFieldName')).val(e.format('yyyy-mm-dd'));
+  });
+  
+  //Select for transferBy
+  $(".transfer-by").change(function(){
+    var val = $(this).val();
+    var container = $(this).parent(".controls");
+    $("input", container).addClass("hidden");
+    $("." + val, container).removeClass("hidden");
   });
   
 }

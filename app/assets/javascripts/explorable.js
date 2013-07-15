@@ -22,7 +22,7 @@ function et_listing_make_fluid() {
 $(document).ready(function() {
   et_window_width = $(window).width();
   //Setup scroll bar
-  //$('.et-place-main-text').tinyscrollbar();
+  $('.et-place-main-text').tinyscrollbar();
   $('.et-normal-listings #et-listings').tinyscrollbar();
 	et_listing_make_fluid();
   
@@ -39,6 +39,8 @@ $(document).ready(function() {
       return false;
   	});
   	
+    $('.ui-draggable').draggable();
+    
   
 });
 
@@ -52,7 +54,7 @@ $(window).resize( function(){
 	if ( $et_main_map.length ) {
 		//$et_main_map.gmap3("get").panTo( et_active_marker.position );
     
-    if ( $('.et-place-main-text:visible') ) {
+    if ( $('.et-place-main-text').is(':visible  ') ) {
       $('.et-place-main-text:visible').tinyscrollbar_update();
     }
     
