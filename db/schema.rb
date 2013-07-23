@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130629145121) do
+ActiveRecord::Schema.define(:version => 20130721182347) do
 
   create_table "tour_steps", :force => true do |t|
     t.string   "title"
@@ -21,9 +21,11 @@ ActiveRecord::Schema.define(:version => 20130629145121) do
     t.integer  "durationDays"
     t.text     "description"
     t.string   "transferToType"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.datetime "created_at",                                    :null => false
+    t.datetime "updated_at",                                    :null => false
     t.integer  "tour_id"
+    t.decimal  "city_lat",       :precision => 10, :scale => 6
+    t.decimal  "city_lon",       :precision => 10, :scale => 6
   end
 
   add_index "tour_steps", ["tour_id"], :name => "index_tour_steps_on_tour_id"
@@ -55,12 +57,14 @@ ActiveRecord::Schema.define(:version => 20130629145121) do
     t.string   "country"
     t.string   "city"
     t.integer  "user_id"
-    t.datetime "created_at",          :null => false
-    t.datetime "updated_at",          :null => false
+    t.datetime "created_at",                                         :null => false
+    t.datetime "updated_at",                                         :null => false
     t.string   "avatar_file_name"
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
+    t.decimal  "city_lat",            :precision => 10, :scale => 6
+    t.decimal  "city_lon",            :precision => 10, :scale => 6
   end
 
   add_index "user_infos", ["user_id"], :name => "index_user_infos_on_user_id"

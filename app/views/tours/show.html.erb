@@ -1,44 +1,49 @@
 
-<div class="container">
+<div class="container-fluid">
+	<div class="row-fluid">
+		<div class="span12">
+				
+			<% if notice %>
+				<div class="alert alert-success">
+					<button type="button" class="close" data-dismiss="alert">×</button>
+			    <%= notice %>
+				</div>
+			<% end %>
 	
-	<% if notice %>
-		<div class="alert alert-success">
-			<button type="button" class="close" data-dismiss="alert">×</button>
-	    <%= notice %>
+			<h4>Tour Info</h4>
+	
+			<table class="table table-bordered">
+				<tr>
+					<td><%=t('activerecord.attributes.tour.title')%></td>
+					<td><%= @tour.title%></td>
+				</tr>
+				<tr>
+					<td><%=t('activerecord.attributes.tour.shortDescription')%></td>
+					<td><%= @tour.shortDescription%></td>
+				</tr>
+				<tr>
+					<td><%=t('activerecord.attributes.tour.departureDate')%></td>
+					<td><%= @tour.departureDate%></td>
+				</tr>
+				<tr>
+					<td><%=t('activerecord.attributes.tour.returnDate')%></td>
+					<td><%= @tour.returnDate%></td>
+				</tr>
+				<tr>
+					<td><%= t('activerecord.attributes.tour.budget')%> <%= locale%></td>
+					<td><%= number_to_currency(@tour.budget, :locale => locale ) %></td>
+				</tr>
+				<tr>
+					<td><%=t('activerecord.attributes.tour.description')%></td>
+					<td><%= @tour.description%></td>
+				</tr>
+			</table>
 		</div>
-	<% end %>
-	
-	<h4>Tour Info</h4>
-	
-	<table class="table table-bordered">
-		<tr>
-			<td><%=t('activerecord.attributes.tour.title')%></td>
-			<td><%= @tour.title%></td>
-		</tr>
-		<tr>
-			<td><%=t('activerecord.attributes.tour.shortDescription')%></td>
-			<td><%= @tour.shortDescription%></td>
-		</tr>
-		<tr>
-			<td><%=t('activerecord.attributes.tour.departureDate')%></td>
-			<td><%= @tour.departureDate%></td>
-		</tr>
-		<tr>
-			<td><%=t('activerecord.attributes.tour.returnDate')%></td>
-			<td><%= @tour.returnDate%></td>
-		</tr>
-		<tr>
-			<td><%= t('activerecord.attributes.tour.budget')%> <%= locale%></td>
-			<td><%= number_to_currency(@tour.budget, :locale => locale ) %></td>
-		</tr>
-		<tr>
-			<td><%=t('activerecord.attributes.tour.description')%></td>
-			<td><%= @tour.description%></td>
-		</tr>
-	</table>
+	</div>
 	
 	<div id="steps-list">		
 		<%= render 'steps_list' %>
 	</div>
+		
 		
 </div>

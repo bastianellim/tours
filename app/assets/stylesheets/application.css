@@ -37,3 +37,8 @@ input.hidden {display: none;}
   border: 1px solid #ccc;
   box-shadow: 0px 0px 3px #ccc;
 }
+
+.tab-content .tab-pane {display: none;}
+.tab-content .active {display: block;}
+
+.validation-error ul {margin: 0px;}

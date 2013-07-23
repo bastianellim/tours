@@ -24,19 +24,46 @@ class TourStepsController < ApplicationController
   
   def create  
     @tour = Tour.find(params[:tour_id])
-    @tour.tour_step.build(params[:tour_step])
+    @tour_step = TourStep.new(params[:tour_step])
+    
+    if @tour_step.valid?
+      @tour.tour_step << @tour_step
+    end  
+    #@tour.tour_step.build(params[:tour_step])
+    
+    
 
     respond_to do |format|
       if @tour.save
-        format.html { redirect_to @tour, notice: 'Tour Step was successfully created.' }
-        format.json { render json: @tour, status: :created, location: @tour }
-        format.js do
+        @tour_step = TourStep.new
+        
+        format.html { 
+          redirect_to @tour, 
+          notice: 'Tour Step was successfully created.' 
+        }
+        format.json { 
+          render json: @tour, 
+          status: :created, 
+          location: @tour 
+        }
+        format.js {
           render :partial => "steps_list",
           notice: 'Tour Step was successfully created.'
-        end
-      else
-        format.html { render action: "new" }
-        format.json { render json: @tour.errors, status: :unprocessable_entity }
+        }
+      else        
+        @tour_step = @tour.tour_step.last
+        
+        format.html { 
+          render action: "new" 
+        }
+        format.json { 
+          render json: @tour.errors, 
+          status: :unprocessable_entity 
+        }
+        format.js { 
+          render :partial => "steps_list",
+          notice: 'Tour Step was not created.'
+        }
       end
     end
   end

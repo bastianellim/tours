@@ -1,116 +1,150 @@
-<% if notice %>
-	<div class="alert alert-success">
+
+
+<% if @tour_step.errors.any? %>
+	<div class="alert alert-error validation-error remove-delayed" style="position:fixed; top: 20px; right: 20px; width: 200px;">
 		<button type="button" class="close" data-dismiss="alert">×</button>
-    <%= notice %>
-	</div>
+    <ul>
+			<li><b>Error</b></li>
+    <% @tour_step.errors.full_messages.each do |msg| %>
+      <li> - <%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
 <% end %>
 
-<%= form_for([@tour, @tour.tour_step.build], :remote => true, :html => {:class => 'form-horizontal well'} ) do |f| %>
-    <fieldset>
-        <!-- Address form -->
-				<h5>Intro</h5>				
-        <!-- title input-->
-        <div class="control-group">
-            <label class="control-label"><%=t('activerecord.attributes.tour_step.title')%></label>
-            <div class="controls">
-							<%= f.text_field :title, :placeholder => t('activerecord.attributes.tour_step.title'), :class => 'input-xlarge' %>	
-            </div>
-        </div>
+<div class="row-fluid">
+	<div class="span12">
+		<h4>Insert new step</h4>
+		<div class="tabbable tabs-left well">
+			<ul class="nav nav-tabs">
+			  <li class="active"><a href="#lA" data-toggle="tab">Intro</a></li>
+			  <li class=""><a href="#lB" data-toggle="tab">Where</a></li>
+			  <li class=""><a href="#lC" data-toggle="tab">Accomodations</a></li>
+			</ul>
+
+			<div class="tab-content">
+				<%= form_for([@tour, @tour_step], :remote => true, :html => {:class => 'form-horizontal'} ) do |f| %>
+    		<fieldset>
+					
+	        <div class="tab-pane active" id="lA">
+						<!-- Address form -->
+						<h5>Intro</h5>				
+		        <!-- title input-->
+		        <div class="control-group">
+		          <label class="control-label"><%=t('activerecord.attributes.tour_step.title')%></label>
+		          <div class="controls">
+								<%= f.text_field :title, :placeholder => t('activerecord.attributes.tour_step.title'), :class => 'input-xlarge' %>	
+		      		</div>
+	        	</div>
 				
-        <!-- description input-->
-        <div class="control-group">
-            <label class="control-label"><%=t('activerecord.attributes.tour_step.description')%></label>
-            <div class="controls">
-							<%= f.text_area :description, 
-								:placeholder => t('activerecord.attributes.tour_step.description'), 
-								:class => 'input-xlarge',
-								rows: 5 %>	
-            </div>
-        </div>
+		        <!-- description input-->
+		        <div class="control-group">
+			        <label class="control-label"><%=t('activerecord.attributes.tour_step.description')%></label>
+			        <div class="controls">
+								<%= f.text_area :description, 
+									:placeholder => t('activerecord.attributes.tour_step.description'), 
+									:class => 'input-xlarge',
+									rows: 5 %>	
+			        </div>
+		        </div>
+					</div>
 				
-        <h5>Where</h5>
-				<!-- country input-->
-        <div class="control-group">
-            <label class="control-label"><%=t('activerecord.attributes.tour_step.country')%></label>
-            <div class="controls">
-							<!-- <%= f.text_field :country, :placeholder => t('activerecord.attributes.user_info.country'), :class => 'input-xlarge' %> -->
-							<!-- <%= f.country_select :country, nil, {}, {:class=>'some-class', :'data-provide' =>"no-typeahead"} %> -->
-							<%= f.localized_country_select :country, [], {:include_blank => 'Country'}, {:class => 'country-for-city'} %>
+					<div class="tab-pane" id="lB">
+		        <h5>Where</h5>
+						<!-- country input-->
+		        <div class="control-group">
+		            <label class="control-label"><%=t('activerecord.attributes.tour_step.country')%></label>
+		            <div class="controls">
+									<!-- <%= f.text_field :country, :placeholder => t('activerecord.attributes.user_info.country'), :class => 'input-xlarge' %> -->
+									<!-- <%= f.country_select :country, nil, {}, {:class=>'some-class', :'data-provide' =>"no-typeahead"} %> -->
+									<%= f.localized_country_select :country, [], {:include_blank => 'Country'}, {:class => 'country-for-city'} %>
 								
-            </div>
-        </div>
-        <!-- city input-->
-        <div class="control-group">
-            <label class="control-label"><%=t('activerecord.attributes.tour_step.city')%></label>
-            <div class="controls">
-							<%= f.text_field :city, 
-							:placeholder => t('activerecord.attributes.tour_step.city'), 
-							:class => 'input-xlarge typehead-cities clear-onfocus', 
-							:disabled => :country.blank?, 
-							:data => { :ref_country => :country.blank? ? '' : :country.downcase} %>	
-            </div>
-        </div>
+		            </div>
+		        </div>
+
+		        <!-- city input-->
+		        <div class="control-group">
+		            <label class="control-label"><%=t('activerecord.attributes.tour_step.city')%></label>
+		            <div class="controls">
+									<%= f.text_field :city, 
+									:placeholder => t('activerecord.attributes.tour_step.city'), 
+									:class => 'input-xlarge typehead-cities clear-onfocus', 
+									:disabled => @tour_step.country.blank?, 
+									:data => { :ref_country => @tour_step.country.blank? ? '' : @tour_step.country.downcase} %>
+									
+									<%= f.hidden_field :city_lat,
+									:class => 'latitude' %>
+									<%= f.hidden_field :city_lon,
+									:class => 'longitude' %>
+		            </div>
+		        </div>
 				
-        <h5>How did you reach</h5>
-        <div class="control-group">
-            <label class="control-label">By</label>
-            <div class="controls">
-							<select class="transfer-by">
-								<option value=""></option>
-								<option value="AIR">Airplane</option>
-								<option value="TRAIN">Train</option>
-								<option value="BUS">Bus</option>
-								<option value="RENTCAR">Rented car</option>
-								<option value="MYCAR">My own car</option>
-							</select>
+		        <h5>How did you reach</h5>
+		        <div class="control-group">
+		            <label class="control-label">By</label>
+		            <div class="controls">
+									<select class="transfer-by">
+										<option value=""></option>
+										<option value="AIR">Airplane</option>
+										<option value="TRAIN">Train</option>
+										<option value="BUS">Bus</option>
+										<option value="RENTCAR">Rented car</option>
+										<option value="MYCAR">My own car</option>
+									</select>
 							
-							<input type="text" class="hidden for-transfer-by AIR" placeholder="APT from" />
-							<input type="text" class="hidden for-transfer-by AIR" placeholder="APT to" />
-							<input type="text" class="hidden for-transfer-by TRAIN for-BUS for-RENTCAR" placeholder="Extra info" />
-            </div>
-        </div>
+									<input type="text" class="hidden for-transfer-by AIR" placeholder="APT from" />
+									<input type="text" class="hidden for-transfer-by AIR" placeholder="APT to" />
+									<input type="text" class="hidden for-transfer-by TRAIN for-BUS for-RENTCAR" placeholder="Extra info" />
+		            </div>
+		        </div>
+					</div>
 				
-				<h5>How long did you stay</h5>
-        <!-- duration input-->
-        <div class="control-group">
-            <label class="control-label"><%=t('activerecord.attributes.tour_step.durationDays')%></label>
-            <div class="controls">
-							<%= f.text_field :durationDays, :placeholder => t('activerecord.attributes.tour_step.durationDays'), :class => 'input-small' %>	
-            </div>
-        </div>
+					<div class="tab-pane" id="lC">
+						<h5>How long did you stay</h5>
+		        <!-- duration input-->
+		        <div class="control-group">
+		            <label class="control-label"><%=t('activerecord.attributes.tour_step.durationDays')%></label>
+		            <div class="controls">
+									<%= f.text_field :durationDays, :placeholder => t('activerecord.attributes.tour_step.durationDays'), :class => 'input-small' %>	
+		            </div>
+		        </div>
         
-				<h5>Where did you sleep</h5>
-        <!-- duration input-->
-        <div class="control-group">
-            <label class="control-label"><%=t('activerecord.attributes.tour_step.durationDays')%></label>
-            <div class="controls">
-							<div class="input-append">
-								<input  id="field1" name="prof1" type="text" placeholder="Place" />
-								<button id="b1" onClick="addFormField()" class="btn btn-info" type="button">+</button>
-							</div>	
-            </div>
-        </div>
+						<h5>Where did you sleep</h5>
+		        <!-- duration input-->
+		        <div class="control-group">
+		            <label class="control-label"><%=t('activerecord.attributes.tour_step.durationDays')%></label>
+		            <div class="controls">
+									<div class="input-append">
+										<input  id="field1" name="prof1" type="text" placeholder="Place" />
+										<button id="b1" onClick="addFormField()" class="btn btn-info" type="button">+</button>
+									</div>	
+		            </div>
+		        </div>
 				
-				<h5>Places to visit</h5>
-        <div class="control-group">
-            <label class="control-label"><%=t('activerecord.attributes.tour_step.durationDays')%></label>
-            <div class="controls">
-							<div class="input-append">
-								<input  id="field1" name="prof1" type="text" placeholder="Place" />
-								<button id="b1" onClick="addFormField()" class="btn btn-info" type="button">+</button>
-							</div>	
-            </div>
-        </div>
-				
-        <!-- create button-->
-        <div class="control-group">
-          <div class="controls">
-					  <%= f.submit "Create", 
-						:class => 'btn btn-info',
-						:data => {:loading_text => 'Loading...'} %>
+						<h5>Places to visit</h5>
+		        <div class="control-group">
+		            <label class="control-label"><%=t('activerecord.attributes.tour_step.durationDays')%></label>
+		            <div class="controls">
+									<div class="input-append">
+										<input  id="field1" name="prof1" type="text" placeholder="Place" />
+										<button id="b1" onClick="addFormField()" class="btn btn-info" type="button">+</button>
+									</div>	
+		            </div>
+		        </div>
+					</div>
+        
+					<!-- create button-->
+	        <div class="control-group">
+	          <div class="controls">
+						  <%= f.submit "Save", 
+							:class => 'btn btn-info',
+							:data => {:loading_text => 'Loading...'} %>
+					  </div>
 				  </div>
-			  </div>
-    </fieldset>
-<% end %>
-
-
+				
+    		</fieldset>
+				<% end %>
+			</div>
+		</div>
+	</div>
+</div>
