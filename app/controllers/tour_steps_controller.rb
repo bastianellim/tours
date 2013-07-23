@@ -24,12 +24,7 @@ class TourStepsController < ApplicationController
   
   def create  
     @tour = Tour.find(params[:tour_id])
-    @tour_step = TourStep.new(params[:tour_step])
-    
-    if @tour_step.valid?
-      @tour.tour_step << @tour_step
-    end  
-    #@tour.tour_step.build(params[:tour_step])
+    @tour.tour_step.build(params[:tour_step])
     
     
 
@@ -52,6 +47,7 @@ class TourStepsController < ApplicationController
         }
       else        
         @tour_step = @tour.tour_step.last
+        @tour.tour_step.delete(@tour.tour_step.last)
         
         format.html { 
           render action: "new" 
