@@ -61,5 +61,17 @@ module Tours
     
     # If you plan to deploy to heroku
     config.assets.initialize_on_precompile = false
+    
+    #Override validation error view generation
+    config.action_view.field_error_proc = Proc.new do |html_tag, instance|
+      unless html_tag =~ /^<label/
+        %{<div class="field_with_errors control-group error">#{html_tag}<span for="#{instance.send(:tag_id)}" class="help-inline">#{instance.error_message.first}</span></div>}.html_safe
+      else
+        %{<div class="field_with_errors control-group error">#{html_tag}</div>}.html_safe
+      end
+    end
+    
   end
 end
+
+
