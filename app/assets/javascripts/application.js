@@ -21,6 +21,54 @@
 var service = new google.maps.places.AutocompleteService();
 var geocoder = new google.maps.Geocoder();
 
+//Clear input text end relative hidden fields
+function clearCityValue(cityInput){
+  cityInput.val('');
+  var container = cityInput.closest(".controls");
+  $(".latitude", container).val('');
+  $(".longitude", container).val('');
+  hideMap(cityInput);
+}
+
+//Show map when selected a city
+function showMapForCity(cityInput, lat, lon){
+  var point = new google.maps.LatLng(lat, lon);
+  
+  // Create map and add controls
+  var mapOptions = {
+    center: point,
+    zoom: 12,
+    mapTypeId: google.maps.MapTypeId.ROADMAP,
+    scrollwheel: false,
+    scaleControl: false
+  };
+  //Add map to container
+  var mapContainer = $(".map",cityInput.closest(".tab-pane"));
+  var map = new google.maps.Map(mapContainer[0],mapOptions);
+	//Add a draggable marker
+  marker = new google.maps.Marker({
+    map: map,
+    draggable: true,
+    animation: google.maps.Animation.DROP,
+    position: point
+  });
+  var defaultImage = new google.maps.MarkerImage(
+      "http://maps.gstatic.com/mapfiles/place_api/icons/geocode-71.png",
+      new google.maps.Size(71, 71),
+      new google.maps.Point(0, 0),
+      new google.maps.Point(17, 34),
+      new google.maps.Size(35, 35));
+  marker.setIcon(defaultImage);
+  
+  
+  mapContainer.show("fade");
+}
+
+function hideMap(cityInput){
+  var mapContainer = $(".map",cityInput.closest(".tab-pane"));
+  mapContainer.hide( "fade");
+}
+
 function setupPageEvents(){
     
   //Typeahead for citites
@@ -50,9 +98,15 @@ function setupPageEvents(){
             alert('Cannot find address');
             return;
           } else {
-            var container = element.parent(".controls");
-            $(".latitude", container).val(results[0].geometry.location.lat());
-            $(".longitude", container).val(results[0].geometry.location.lng());
+            //Set latitude end longitude in hidden fields
+            var container = element.closest(".controls");
+            var lat = results[0].geometry.location.lat();
+            var lon = results[0].geometry.location.lng();
+            //Set hidden field
+            $(".latitude", container).val(lat);
+            $(".longitude", container).val(lon);
+            //Show map
+            showMapForCity(element, lat, lon);
           }
           //alert('Selected');
           //map.setCenter(results[0].geometry.location);
@@ -66,6 +120,10 @@ function setupPageEvents(){
   //Clear text field onfocus
   $(".clear-onfocus").click(function(){
       $(this).val('');
+      //If typehead cities clear hidden fields also
+      if($(this).hasClass("typehead-cities")){
+        clearCityValue($(this));
+      }
   });
 
   //When country selection change:
@@ -82,7 +140,7 @@ function setupPageEvents(){
       cityInput.data('refCountry', '')
       cityInput.attr('disabled', 'disabled');
     }
-    cityInput.val('');
+    clearCityValue(cityInput);
   });
 
   //Date picker

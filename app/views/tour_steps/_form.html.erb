@@ -12,14 +12,13 @@
   </div>
 <% end %>
 
-<div class="row-fluid">
+<div class="row-fluid new-step-container">
 	<div class="span12">
 		<h4>Insert new step</h4>
 		<div class="tabbable tabs-left well">
 			<ul class="nav nav-tabs">
-			  <li class="active"><a href="#lA" data-toggle="tab">Intro</a></li>
-			  <li class=""><a href="#lB" data-toggle="tab">Where</a></li>
-			  <li class=""><a href="#lC" data-toggle="tab">Accomodations</a></li>
+			  <li class="active"><a href="#lA" data-toggle="tab">Basic</a></li>
+			  <li class=""><a href="#lB" data-toggle="tab">Extra info</a></li>
 			</ul>
 
 			<div class="tab-content">
@@ -27,7 +26,11 @@
     		<fieldset>
 					
 	        <div class="tab-pane active" id="lA">
-						<!-- Address form -->
+						<div class="container-fluid">
+						
+				    <div class="row-fluid">
+						<div class="span6">
+						
 						<h5>Intro</h5>				
 		        <!-- title input-->
 		        <div class="control-group">
@@ -47,9 +50,7 @@
 									rows: 5 %>	
 			        </div>
 		        </div>
-					</div>
-				
-					<div class="tab-pane" id="lB">
+						
 		        <h5>Where</h5>
 						<!-- country input-->
 		        <div class="control-group">
@@ -97,9 +98,20 @@
 									<input type="text" class="hidden for-transfer-by TRAIN for-BUS for-RENTCAR" placeholder="Extra info" />
 		            </div>
 		        </div>
+						</div>
+						
+						<div class="span6">
+							<div class="map">
+							</div>
+						</div>
+						
+						
+						</div>
+						</div>
+						
 					</div>
 				
-					<div class="tab-pane" id="lC">
+					<div class="tab-pane" id="lB">
 						<h5>How long did you stay</h5>
 		        <!-- duration input-->
 		        <div class="control-group">
