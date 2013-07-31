@@ -28,16 +28,16 @@ $(document).ready(function() {
   
   
   
-  	$et_list_view = $('#et-list-view.et-normal-listings');
-  	$et_list_view.find( '.et-date' ).click( function() {
-
+  $et_list_view = $('#et-list-view.et-normal-listings');
+  
+  $et_list_view.find('.et-date' ).click( function() {
+    $et_list_view = $(this).closest('.et-normal-listings');
   	if ( $et_list_view.hasClass( 'et-listview-open' ) )
       $et_list_view.removeClass( 'et-listview-open' );
   	else
-  		$et_list_view.addClass( 'et-listview-open' );
-      
+  		$et_list_view.addClass( 'et-listview-open' );    
       return false;
-  	});
+  });
   	
     $('.ui-draggable').draggable();
     

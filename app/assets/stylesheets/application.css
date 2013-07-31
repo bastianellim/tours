@@ -17,11 +17,12 @@
  */
   
 input.hidden {display: none;}
+div.hidden   {display: none;}
 
 #googlemap, .map {
-  border: 1px dashed #999;
+  /* border: 1px dashed #999; */
   width: 100%;
-  height: 600px;
+  height: 100%;
 }
 
 #googlemap img, .map img {
@@ -41,8 +42,11 @@ input.hidden {display: none;}
 .tab-content .tab-pane {display: none;}
 .tab-content .active {display: block;}
 
+.alert {z-index: 1;}
 .validation-error ul {margin: 0px;}
 
 .new-step-container {
   margin: 0px 0px 100px 0px;
 }
+
+.controls {margin-left: 10px;}

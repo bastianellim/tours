@@ -23,27 +23,27 @@ var geocoder = new google.maps.Geocoder();
 
 //Clear input text end relative hidden fields
 function clearCityValue(cityInput){
-  cityInput.val('');
   var container = cityInput.closest(".controls");
+  cityInput.val('');
   $(".latitude", container).val('');
   $(".longitude", container).val('');
-  hideMap(cityInput);
+  setDefaultMap($(".map",cityInput.closest(".tab-pane")));
 }
 
 //Show map when selected a city
-function showMapForCity(cityInput, lat, lon){
+function showMapForCity(mapContainer, lat, lon, zoom){
   var point = new google.maps.LatLng(lat, lon);
   
   // Create map and add controls
   var mapOptions = {
     center: point,
-    zoom: 12,
+    zoom: zoom,
     mapTypeId: google.maps.MapTypeId.ROADMAP,
     scrollwheel: false,
     scaleControl: false
   };
   //Add map to container
-  var mapContainer = $(".map",cityInput.closest(".tab-pane"));
+  //var mapContainer = $(".map",cityInput.closest(".tab-pane"));
   var map = new google.maps.Map(mapContainer[0],mapOptions);
 	//Add a draggable marker
   marker = new google.maps.Marker({
@@ -64,12 +64,31 @@ function showMapForCity(cityInput, lat, lon){
   mapContainer.show("fade");
 }
 
-function hideMap(cityInput){
-  var mapContainer = $(".map",cityInput.closest(".tab-pane"));
-  mapContainer.hide( "fade");
+function setDefaultMap(mapContainer){
+  //var mapContainer = mapContainer; //$(".map",cityInput.closest(".tab-pane"));
+  showMapForCity(mapContainer, 0, 0, 2);
+  //mapContainer.hide( "fade");
 }
 
 function setupPageEvents(){
+  
+  $(".typehead-hotel").typeahead({
+    source: function(query, process) {
+      return $.ajax({
+        url: 'http://www.tripadvisor.it/TypeAheadJson',
+        type: 'post',
+        data: { query: query },
+        dataType: 'jsonp',
+        success: function (result) {
+          var resultList = result.map(function (item) {
+            var aItem = { id: item.Id, name: item.Name };
+            return JSON.stringify(aItem);
+          });
+          return process(resultList);
+        }
+      });      
+    }
+  });
     
   //Typeahead for citites
   $(".typehead-cities").each(function(){
@@ -99,14 +118,14 @@ function setupPageEvents(){
             return;
           } else {
             //Set latitude end longitude in hidden fields
-            var container = element.closest(".controls");
+            var container = $(".map",element.closest(".tab-pane"));
             var lat = results[0].geometry.location.lat();
             var lon = results[0].geometry.location.lng();
             //Set hidden field
             $(".latitude", container).val(lat);
             $(".longitude", container).val(lon);
             //Show map
-            showMapForCity(element, lat, lon);
+            showMapForCity(container, lat, lon, 12);
           }
           //alert('Selected');
           //map.setCenter(results[0].geometry.location);
@@ -162,7 +181,18 @@ function setupPageEvents(){
   //Hide alert with fadeout after 2 seconds
   $(".remove-delayed").delay(2000).fadeOut("slow");
   
+  //Set default map
+  setDefaultMap($(".map"));
   
+  //Show/Hide insert new step box
+  $("#btn-add-new-step").click(function(){
+    $(".new-step-container").fadeIn(100);
+    $("html, body").animate({ scrollTop: $('.new-step-container').offset().top }, 700);
+    setDefaultMap($(".map"));  
+  });
+  $("#btn-cancel-new-step").click(function(){
+    $(".new-step-container").slideUp(800);
+  });
 }
 
 $(document).ready(function() {

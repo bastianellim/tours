@@ -48,6 +48,7 @@ class TourStepsController < ApplicationController
       else        
         @tour_step = @tour.tour_step.last
         @tour.tour_step.delete(@tour.tour_step.last)
+        @showForm = true
         
         format.html { 
           render action: "new" 

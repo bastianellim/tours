@@ -222,8 +222,10 @@ html, body { height: 100%; margin: 0; padding: 0; }
 .et-map-slide { display: none; }
 .et-map-slide:first-child { display: block; }
 
-#et-list-view { position: fixed; top: 0; right: -400px; height: 100%; width: 399px; background: #cbcbcb url(images/et-list-view-bg.png); z-index: 3; border-left: 1px solid #f7f7f7; -webkit-box-shadow: inset 2px 0 5px rgba(0, 0, 0, 0.15); -moz-box-shadow: inset 2px 0 5px rgba(0, 0, 0, 0.15); box-shadow: inset 2px 0 5px rgba(0, 0, 0, 0.15); -moz-transition: all 0.3s ease-in-out; -webkit-transition: all 0.3s ease-in-out; transition: all 0.3s ease-in-out; }
-#et-list-view.et-listview-open { right: 0; }
+#et-list-view.et-normal-listings.right { position: fixed; top: 0; right: -400px; height: 100%; width: 399px; background: #cbcbcb url(images/et-list-view-bg.png); z-index: 3; border-left: 1px solid #f7f7f7; -webkit-box-shadow: inset 2px 0 5px rgba(0, 0, 0, 0.15); -moz-box-shadow: inset 2px 0 5px rgba(0, 0, 0, 0.15); box-shadow: inset 2px 0 5px rgba(0, 0, 0, 0.15); -moz-transition: all 0.3s ease-in-out; -webkit-transition: all 0.3s ease-in-out; transition: all 0.3s ease-in-out; }
+#et-list-view.et-normal-listings.left { position: fixed; top: 0; left: -400px; height: 100%; width: 399px; background: #cbcbcb url(images/et-list-view-bg.png); z-index: 3; border-left: 1px solid #f7f7f7; -webkit-box-shadow: inset 2px 0 5px rgba(0, 0, 0, 0.15); -moz-box-shadow: inset 2px 0 5px rgba(0, 0, 0, 0.15); box-shadow: inset 2px 0 5px rgba(0, 0, 0, 0.15); -moz-transition: all 0.3s ease-in-out; -webkit-transition: all 0.3s ease-in-out; transition: all 0.3s ease-in-out; }
+#et-list-view.et-listview-open.right { right: 0; }
+#et-list-view.et-listview-open.left { left: 0; }
 	#listing-results { text-align: center; background: rgb(200,200,200); /* Old browsers */ background: -moz-linear-gradient(top,  rgba(200,200,200,1) 0%, rgba(191,191,191,1) 100%); /* FF3.6+ */ background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(200,200,200,1)), color-stop(100%,rgba(191,191,191,1))); /* Chrome,Safari4+ */ background: -webkit-linear-gradient(top,  rgba(200,200,200,1) 0%,rgba(191,191,191,1) 100%); /* Chrome10+,Safari5.1+ */ background: -o-linear-gradient(top,  rgba(200,200,200,1) 0%,rgba(191,191,191,1) 100%); /* Opera 11.10+ */ background: -ms-linear-gradient(top,  rgba(200,200,200,1) 0%,rgba(191,191,191,1) 100%); /* IE10+ */ background: linear-gradient(to bottom,  rgba(200,200,200,1) 0%,rgba(191,191,191,1) 100%); /* W3C */ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#c8c8c8', endColorstr='#bfbfbf',GradientType=0 ); /* IE6-9 */ padding: 28px 0; font-size: 24px; color: #2a2a2a; text-shadow: 1px 1px 0 #fff; border-bottom: 1px solid #afafaf; -webkit-box-shadow: 0 1px 1px #dcdcdc; -moz-box-shadow: 0 1px 1px #dcdcdc; box-shadow: 0 1px 1px #dcdcdc;  }
 	#listing-results { line-height: 24px; margin: 0px;}
   #et-listings { position: relative; padding: 0 15px 0 0; }
@@ -279,7 +281,9 @@ html, body { height: 100%; margin: 0; padding: 0; }
 #et-listings-no-results p { font-size: 17px; padding-top: 9px; }
 
 .et-date:hover { text-decoration: none; color: rgba(255,255,255,0.9); }
-#et-list-view .et-date { position: absolute; top: 50%; left: -90px; margin-top: -17px; -o-transform: rotate(-90deg); -moz-transform: rotate(-90deg); -webkit-transform: rotate(-90deg); transform: rotate(-90deg); box-shadow: inset -1px 1px 0 #6ac7ff, 0 2px 4px rgba(0,0,0,0.3); }
+#et-list-view.et-normal-listings.right .et-date { position: absolute; top: 50%; left: -90px; margin-top: -17px; -o-transform: rotate(-90deg); -moz-transform: rotate(-90deg); -webkit-transform: rotate(-90deg); transform: rotate(-90deg); box-shadow: inset -1px 1px 0 #6ac7ff, 0 2px 4px rgba(0,0,0,0.3); }
+#et-list-view.et-normal-listings.left  .et-date { position: absolute; top: 50%; right: -80px; margin-top: -17px; -o-transform: rotate(90deg); -moz-transform: rotate(90deg); -webkit-transform: rotate(90deg); transform: rotate(90deg); box-shadow: inset -1px 1px 0 #6ac7ff, 0 2px 4px rgba(0,0,0,0.3); }
+
 
 .entry-content h1.title { margin-bottom: 20px; font-size: 36px; }
 
@@ -294,6 +298,10 @@ html, body { height: 100%; margin: 0; padding: 0; }
 
 /*------------------------------------------------*/
 /*---------------[DROPDOWN MENU]------------------*/
+/*------------------------------------------------*/
+
+/*------------------------------------------------*/
+/*-----------------[LEFT MENU]--------------------*/
 /*------------------------------------------------*/
 
 
